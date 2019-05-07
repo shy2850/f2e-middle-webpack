@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "sourceMap": true,
+        "target": "esnext",
+        "jsx": "react",
+        "jsxFactory": "h",
+        "allowJs": true
+    },
+    "include": [
+        "test/**.ts",
+        "test/**.tsx"
+    ]
+}

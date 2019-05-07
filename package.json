@@ -1,0 +1,47 @@
+{
+  "name": "f2e-middle-webpack",
+  "version": "0.1.0",
+  "description": "f2e-middle-webpack",
+  "main": "index.js",
+  "dependencies": {
+    "webpack": "^4.30.0",
+    "webpack-dev-middleware": "^3.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.8.16",
+    "@types/react-dom": "^16.8.4",
+    "@types/webpack": "^4.4.31",
+    "@types/webpack-dev-middleware": "^2.0.2",
+    "antd": "^3.17.0",
+    "css-loader": "^2.1.1",
+    "f2e-server": "^2.9.16",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "style-loader": "^0.23.1",
+    "ts-import-plugin": "^1.5.5",
+    "ts-loader": "^6.0.0",
+    "typescript": "^3.4.5"
+  },
+  "scripts": {
+    "start": "f2e start",
+    "build": "f2e build",
+    "test": "f2e build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shy2850/f2e-middle-webpack.git"
+  },
+  "keywords": [
+    "f2e-server",
+    "f2e-middleware",
+    "webpack"
+  ],
+  "files": [ "index.js" ],
+  "author": "shy2850",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shy2850/f2e-middle-webpack/issues"
+  },
+  "homepage": "https://github.com/shy2850/f2e-middle-webpack#readme"
+}
