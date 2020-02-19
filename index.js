@@ -1,9 +1,10 @@
+// ts-check
 const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
 const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
-const running = process.argv.includes('start')
+const RUNNING = process.argv.includes('start')
 
 const getWebpackConfig = (config_file, conf) => {
     const cfg_path = path.join(conf.root, config_file)
@@ -18,10 +19,18 @@ const getWebpackConfig = (config_file, conf) => {
         throw Error(`${config_file} needed!`)
     }
 }
-
+/**
+ * @returns {import('f2e-server').Middleware}
+ */
 module.exports = (conf, opt = {}) => {
     const { build, root, gzip, output } = conf
-    const { setBefore, test = /^static\//, config_file = 'webpack.config.js', options = {} } = opt;
+    const {
+        setBefore,
+        test = /^static\//,
+        config_file = 'webpack.config.js',
+        running = RUNNING,
+        options = {}
+    } = opt;
     const configs = getWebpackConfig(config_file, conf)
     const compiler = webpack(configs.map(c => Object.assign({
         context: root,
@@ -32,19 +41,17 @@ module.exports = (conf, opt = {}) => {
     })))
 
     let app;
-    let init;
+    if (!running) {
+        compiler.run(function (error, stat) {
+            if (error) {
+                console.log(error)
+            } else {
+                console.log(stat.toString())
+            }
+        })
+    }
     return {
         setBefore,
-        onSet: !running ? (pathname, data, store) => {
-            if (!init && configs.find(({ entry }) => path.join(root, entry) === path.join(root, pathname) )) {
-                init = true
-                return new Promise((resolve, reject) => {
-                    compiler.run(function (error, stat) {
-                        error ? reject(error) : resolve(data)
-                    })
-                })
-            }
-        } : undefined,
         onRoute: running ? (pathname, req, resp) => {
             if (test.test(pathname)) {
                 app = app || webpackMiddleware(compiler, Object.assign({

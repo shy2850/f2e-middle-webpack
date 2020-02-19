@@ -1,6 +1,6 @@
 {
   "name": "f2e-middle-webpack",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "f2e-middle-webpack",
   "main": "index.js",
   "dependencies": {
