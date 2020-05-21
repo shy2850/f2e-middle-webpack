@@ -31,18 +31,20 @@ module.exports = (conf, opt = {}) => {
         running = RUNNING,
         options = {}
     } = opt;
-    const configs = getWebpackConfig(config_file, conf)
-    const compiler = webpack(configs.map(c => Object.assign({
-        context: root,
-        devtool: build ? false : 'source-map',
-        mode: build ? 'production' : 'development'
-    }, c, {
-        output: Object.assign({}, c.output, { path: output })
-    })))
+    const get_compiler = () => {
+        const configs = getWebpackConfig(config_file, conf)
+        return webpack(configs.map(c => Object.assign({
+            context: root,
+            devtool: build ? false : 'source-map',
+            mode: build ? 'production' : 'development'
+        }, c, {
+            output: Object.assign({}, c.output, { path: output })
+        })))
+    }
 
     let app;
     if (!running) {
-        compiler.run(function (error, stat) {
+        get_compiler().run(function (error, stat) {
             if (error) {
                 console.log(error)
             } else {
@@ -54,7 +56,7 @@ module.exports = (conf, opt = {}) => {
         setBefore,
         onRoute: running ? (pathname, req, resp) => {
             if (test.test(pathname)) {
-                app = app || webpackMiddleware(compiler, Object.assign({
+                app = app || webpackMiddleware(get_compiler(), Object.assign({
 
                 }, options))
                 const _end = resp.end.bind(resp)
