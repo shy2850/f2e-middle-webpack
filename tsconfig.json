@@ -2,6 +2,7 @@
     "compilerOptions": {
         "baseUrl": ".",
         "sourceMap": true,
+        "moduleResolution": "Node",
         "target": "esnext",
         "jsx": "react",
         "jsxFactory": "h",
