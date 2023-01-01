@@ -14,13 +14,13 @@
     "@types/webpack": "^4.41.26",
     "@types/webpack-dev-middleware": "^4.1.0",
     "antd": "^3.26.17",
-    "css-loader": "^2.1.1",
+    "css-loader": "^6.7.3",
     "f2e-server": "^2.12.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "style-loader": "^0.23.1",
+    "style-loader": "^3.3.1",
     "ts-import-plugin": "^1.6.6",
-    "ts-loader": "^6.2.2",
+    "ts-loader": "^9.4.2",
     "typescript": "^3.9.3"
   },
   "scripts": {
